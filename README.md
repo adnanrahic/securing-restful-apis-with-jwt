@@ -1,9 +1,8 @@
-# nodejs-restful-api
-![RESTful API design with Node.js](https://cdn-images-1.medium.com/max/2000/1*jjYC9tuf4C3HkHCP5PcKTA.jpeg "RESTful API design with Node.js")
+# Securing RESTful APIs with JWT
 
-How to create a RESTful CRUD API using Nodejs?
+How to secure a Nodejs RESTful CRUD API using JSON web token?
 
-This tutorial will demo how to set up a bare bones 
+This tutorial will demo how to use JWT with an existing bare bones 
 API using mongodb as the database.
 
 It consist of a User model and controller. The model
@@ -16,6 +15,9 @@ for bootstrapping the application itself.
 
 The server file is used to spin up the server and tells the
 app to listen on a specific port.
+
+The auth folder contains the configuration for registering and 
+logging users in, signing and verifying tokens.
 
 Full tutorial can be found at:
 https://hackernoon.com/restful-api-design-with-node-js-26ccf66eab09#.s5l66zyeu
