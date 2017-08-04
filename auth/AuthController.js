@@ -1,8 +1,13 @@
 var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
+
+var VerifyToken = require('./VerifyToken');
+
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
+
+var User = require(__root + 'user/User');
 
 /**
  * Configure JWT
@@ -58,7 +63,7 @@ router.post('/register', function(req, res) {
 
 });
 
-router.get('/me', function(req, res) {
+router.get('/me', VerifyToken, function(req, res) {
 
   var token = req.body.token || req.query.token || req.headers['x-access-token'];
   if (!token) 
@@ -70,11 +75,30 @@ router.get('/me', function(req, res) {
       return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });    
 
     /**
-     * SHOW THAT DECODED IS AN OBJECT WITH A _doc PROPERTY
+     * SHOW THAT DECODED IS AN OBJECT WITH AN id PROPERTY
      */
 
+    // Step 1.
     // if everything is good, send back the decoded token
-    res.status(200).send(decoded);
+    // res.status(200).send(decoded.id);
+
+    // Step 2.
+    // Fetch the user by the decoded.id
+    // Send back the user with username and email
+    // User.findById(decoded.id, { _id:0, name:1, email:1 }, function (err, user) {
+    //   if (err) return res.status(500).send("There was a problem finding the user.");
+    //   if (!user) return res.status(404).send("No user found.");
+    //   res.status(200).send(user);
+    // });
+
+    // Step 3. 
+    // Add VerifyToken middleware and use req.userId to query the db
+    User.findById(req.userId, { _id:0, name:1, email:1 }, function (err, user) {
+      if (err) return res.status(500).send("There was a problem finding the user.");
+      if (!user) return res.status(404).send("No user found.");
+      res.status(200).send(user);
+    });
+    
   });
 
 });
