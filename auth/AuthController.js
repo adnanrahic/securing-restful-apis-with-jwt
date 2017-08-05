@@ -50,7 +50,7 @@ router.post('/register', function(req, res) {
     password : req.body.password
   }, 
   function (err, user) {
-    if (err) return res.status(500).send("There was a problem adding the information to the database.");
+    if (err) return res.status(500).send("There was a problem registering the user.");
 
     // if user is registered without errors
     // create a token
@@ -58,7 +58,7 @@ router.post('/register', function(req, res) {
       expiresIn: 86400 // expires in 24 hours
     });
 
-    res.status(200).send({ auth: false, token: null });
+    res.status(200).send({ auth: true, token: token });
   });
 
 });
@@ -95,7 +95,7 @@ router.get('/me', VerifyToken, function(req, res) {
 
   // Step 3. 
   // Add VerifyToken middleware and use req.userId to query the db
-  User.findById(req.userId, { _id:0, name:1, email:1 }, function (err, user) {
+  User.findById(req.userId, { password: 0 }, function (err, user) {
     if (err) return res.status(500).send("There was a problem finding the user.");
     if (!user) return res.status(404).send("No user found.");
     res.status(200).send(user);
