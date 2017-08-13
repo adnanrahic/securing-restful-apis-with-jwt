@@ -20,5 +20,3 @@ app to listen on a specific port.
 
 The auth folder contains the configuration for registering and 
 logging users in, signing and verifying tokens.
-
-Full tutorial can be found [here]().
