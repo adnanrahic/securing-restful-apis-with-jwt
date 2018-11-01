@@ -1,1 +1,5 @@
 node_modules
+
+# Add .env files to .gitignore # remove these comments
+# prod.env
+# test.env

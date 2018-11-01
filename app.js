@@ -1,16 +1,18 @@
-var express = require('express');
-var app = express();
-var db = require('./db');
-global.__root   = __dirname + '/'; 
+/* global __root */
+const path = require('path')
+const express = require('express')
+const app = express()
+require('./db')
+global.__root = path.join(__dirname)
 
-app.get('/api', function (req, res) {
-  res.status(200).send('API works.');
-});
+app.get('/api', (req, res) => {
+  res.status(200).send('API works.')
+})
 
-var UserController = require(__root + 'user/UserController');
-app.use('/api/users', UserController);
+const UserController = require(__root + 'user/UserController')
+app.use('/api/users', UserController)
 
-var AuthController = require(__root + 'auth/AuthController');
-app.use('/api/auth', AuthController);
+const AuthController = require(__root + 'auth/AuthController')
+app.use('/api/auth', AuthController)
 
-module.exports = app;
+module.exports = app
