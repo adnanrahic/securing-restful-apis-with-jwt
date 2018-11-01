@@ -1,2 +1,4 @@
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:27017/securing-rest-apis-with-jwt', { useMongoClient: true });
+const config = require('./config')
+var mongoose = require('mongoose')
+mongoose.Promise = global.Promise
+mongoose.connect(config.db, { useNewUrlParser: true })
