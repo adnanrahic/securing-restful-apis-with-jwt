@@ -6,8 +6,8 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:8
-      - image: circleci/mongo:3.4.4
+      - image: circleci/node:10
+      - image: circleci/mongo:4
 
     working_directory: ~/code/securing-restful-apis-with-jwt
 
