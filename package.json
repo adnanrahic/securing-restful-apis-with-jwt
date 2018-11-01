@@ -6,7 +6,8 @@
   "scripts": {
     "start": "NODE_ENV=prod node server.js",
     "dev": "NODE_ENV=dev nodemon server.js",
-    "test": "NODE_ENV=test nodemon test.js"
+    "test": "NODE_ENV=test nodemon test.js",
+    "ci-test": "NODE_ENV=test node test.js"
   },
   "author": "",
   "license": "ISC",
