@@ -1,6 +1,4 @@
 /* eslint-env mocha */
-
-const path = require('path')
 const Mocha = require('mocha')
 const mocha = new Mocha()
 const chai = require('chai')
@@ -13,8 +11,6 @@ var files = Mocha.utils.lookupFiles(testDir, ['js'], true)
 files.forEach(function (file) {
   mocha.addFile(file)
 })
-
-global.__root = path.join(__dirname)
 
 // Start server
 require('./server')
